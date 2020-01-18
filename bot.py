@@ -4,8 +4,8 @@ import asyncio
 
 
 client = discord.Client()
-token = "NjY3OTA5NTkxNjE4NTUxODI5.XiNBzA.obD97f60_AVxw2sSeGXCFdtXuoQ"
-GUILD = 667910402667184129
+token = "BOT-TOKEN"
+GUILD = SERVER-GUILD
 joined = 0
 messages = 0
 
