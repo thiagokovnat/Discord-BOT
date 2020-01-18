@@ -4,3 +4,6 @@
 4) Having asyncio, "pip install asyncio"
 5) Replace your tokens and guild ID on the given code.
 6) Run python bot.py
+
+OPTIONAL:
+Replace the insult list with words you want banned on your server.
