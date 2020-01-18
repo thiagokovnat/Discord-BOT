@@ -35,7 +35,7 @@ async def on_message(message):
         await message.channel.send(content = None, embed = embedded)
 
     elif message.content.lower() == "happy birthday" or message.content.lower() == "feliz cumpleaños":
-        await message.channel.send("Happy birthday, discord user!")
+        await message.channel.send("Happy birthday, Discord user! 🎈🎉")
     elif message.content == "!usernames":
         for guild in client.guilds:
             if guild == GUILD:
@@ -89,6 +89,26 @@ async def on_guild_channel_delete(channel):
     for c in id.channels:
         if str(c).find("general") != -1:
             await c.send(f"""Channel {channel.name} was deleted.""")
+            break
+
+@client.event
+async def on_guild_channel_update(before, after):
+    await after.send(f"""{before.name} now is called {after.name}""")
+
+@client.event
+async def on_guild_join(guild):
+    for channel in guild.channels:
+        if channel.name == "general":
+            await channel.send("Hi, thanks for welcoming me to your server. Check !help for a list of commands")
+            break
+
+@client.event
+async def on_guild_role_create(role):
+    id = client.get_guild(GUILD)
+
+    for channel in id.channels:
+        if channel.name == "general":
+            await channel.send("New role created.")
             break
 
 
