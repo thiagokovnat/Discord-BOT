@@ -1,0 +1,6 @@
+1) Have a GUILD ID. You can look yours up from the settings on the Discord server.
+2) BOT Token. You can get yours on Developers Tools in Discord.com
+3) Discord.py, you can install it using "pip install discord.py"
+4) Having asyncio, "pip install asyncio"
+5) Replace your tokens and guild ID on the given code.
+6) Run python bot.py
