@@ -8,8 +8,8 @@ from discord.ext import commands
 
 
 client = commands.Bot(command_prefix="!")
-token = "NjY3OTA5NTkxNjE4NTUxODI5.XiNkgg.X8rKE5-83fH5KxwB7rxeq_x2fjA"
-GUILD = 668246451863814155
+token = YOUR-TOKEN
+GUILD = YOUUR-SERVER-ID
 joined = 0
 messages = 0
 
