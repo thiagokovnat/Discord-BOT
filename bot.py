@@ -22,6 +22,13 @@ async def on_ready():
 
         print(f"""{client.user} is now connected to Discord on Guild {guild.name}, {guild.id}!""")
 
+@client.command(name = "stats", help = "gives stats about a specific member")
+async def getStats(ctx, User : discord.Member):
+    if User not in ctx.guild.members:
+        await ctx.send("There is no such user in this server.")
+    else:
+
+        await ctx.send(f"""Stats about {User.mention}: \n\t Member since: {User.joined_at} \n\t Status: {str(User.status)} \n\t Highest Role: {str(User.top_role.name)}\n\t """)
 
 @client.event
 async def on_member_join(member):
@@ -56,7 +63,7 @@ async def on_guild_channel_delete(channel):
 
 @client.event
 async def on_guild_channel_update(before, after):
-    await after.send(f"""{before.name} now is called {after.name}""")
+    await after.send(f"""{before.name} is now called {after.name}""")
 
 
 @client.event
@@ -121,6 +128,10 @@ async def md5(ctx, *args):
     encryptedRes = hashlib.md5(message.encode())
     await ctx.send(encryptedRes.hexdigest())
 
+@client.command(name = "softban", help = "bans and unbans a user")
+async def softban(ctx, user : discord.Member, reason = None):
+    await user.ban(reason = reason)
+    await user.unban(reason = reason)
 
 @client.command(name = "callouts", help = "shows an image of CSGO Callouts")
 async def giveURL(ctx, map):
@@ -149,18 +160,17 @@ async def giveURL(ctx, map):
         Embedded.add_field(name = "Dust 2", value = "!callouts dust", inline = False)
         await ctx.send(content = None, embed = Embedded)
 
-#@client.command(name = "stats", help = "gives your current CSGO Stats")
-#async def getStats(ctx, steamId):
-    #url = "https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=12A1D1DE83F9932934EDD6DF2BA00463&steamid=" + str(steamId)
-    #r = requests.get(url).json()
+@client.command(name = "users", help = "returns the amount of users")
+async def getUsers(ctx):
+    await ctx.send(f"""Current amount of users: {ctx.guild.member_count}""")
 
-    #stats = {
-       # 'total_kills': r['playerstats']['stats'][0]['value'],  # total kills
-      #  'total_deaths': r['playerstats']['stats'][1]['value'],  # total deaths
-     #   'total_time': r['playerstats']['stats'][2]['value']  # total time played
-    #}
+@client.command(name = "usernames", help = "returns all usernames")
+async def getUsernames(ctx):
+    names = []
+    for member in ctx.guild.members:
+        names.append(member.name)
 
-   # await ctx.send(f"""Total Kills: {stats["total_kills"]}, Total Deaths: {stats['total_deaths']}, Time Played: {stats['total_time']/3600}h. KD: {stats["total_kills"]/stats['total_deaths']}""")
+    await ctx.send("Current Users: \n" + "\n".join(names))
 
 @client.command(name = "ping", help = "returns current bot ping")
 async def ping(ctx):
